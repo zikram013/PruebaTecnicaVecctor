@@ -39,6 +39,7 @@ namespace PruebaTecnicaVecctor.Servicio
                 return result;
             }
 
+            var datosObtenidos = _apiService.ObtenerDatos(DateTime.Now + DateTime.Now.AddDays(days));
 
             return result;
         }

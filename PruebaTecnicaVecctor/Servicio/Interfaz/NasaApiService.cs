@@ -4,7 +4,7 @@ namespace PruebaTecnicaVecctor.Servicio.Interfaz
 {
     public class NasaApiService : INasaApiService
     {
-        public DatoApiNasaDTO ObtenerDatos(DateTime ahora, DateTime hasta)
+        public DatoApiNasaDTO ObtenerDatos(string ahora, string hasta)
         {
             throw new NotImplementedException();
         }

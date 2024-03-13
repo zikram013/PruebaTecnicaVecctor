@@ -4,6 +4,6 @@ namespace PruebaTecnicaVecctor.Servicio.Interfaz
 {
     public interface INasaApiService
     {
-        DatoApiNasaDTO ObtenerDatos(DateTime ahora,DateTime hasta):
+        DatoApiNasaDTO ObtenerDatos(string ahora, string hasta);
     }
 }
