@@ -63,7 +63,7 @@ namespace PruebaTecnicaVecctor.Servicio
 
 
             var asteroides = datosObtenidos.Select(x => x.near_earth_objects)
-                .Where(obj => obj.is_potentially_hazardous_asteroid)
+                .Where(obj => !obj.is_potentially_hazardous_asteroid)
                 .Select(obj => new NasaAsteroids
                 {
                     Id = int.Parse(obj.id),

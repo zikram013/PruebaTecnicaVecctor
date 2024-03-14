@@ -61,35 +61,37 @@ namespace PruebaTecnicaVecctor.Servicio.Interfaz
         private List<NearEarthObjects> ParseNearEarthObjects(string jsonResponse)
         {
             List<NearEarthObjects> nearEarthObjectsLista = new List<NearEarthObjects>();
-           
 
             JObject parent = JObject.Parse(jsonResponse);
-            var dias = parent.Value<JObject>("near_earth_objects").Properties().ToList();
+            var nearEarthObjects = parent["near_earth_objects"];
 
-            foreach (var item in dias)
+            foreach (JProperty day in nearEarthObjects)
             {
-                foreach (var item2 in item.Value)
+                foreach (JToken asteroid in day.Value)
                 {
-                    var obj = item2.ToList();
-                    var is_potentially_hazardous_asteroid = bool.Parse(obj[7].First.ToString());
+                    bool isPotentiallyHazardous = asteroid["is_potentially_hazardous_asteroid"].Value<bool>();
 
-                    if (is_potentially_hazardous_asteroid)
+                    if (isPotentiallyHazardous)
                     {
+                        var estimatedDiameter = asteroid["estimated_diameter"].ToObject<EstimatedDiameter>();
+                        var maxDiameter = asteroid["estimated_diameter"]["kilometers"]["estimated_diameter_max"].Value<double>();
+                        var minDiameter = asteroid["estimated_diameter"]["kilometers"]["estimated_diameter_min"].Value<double>();
+
                         nearEarthObjectsLista.Add(new NearEarthObjects
                         {
-                            name = obj[3].First.ToString(),
-                            estimated_diameter = obj[6].First.ToObject<EstimatedDiameter>(),
-                            mediaDiametro = CalculaMedia(obj[6].First["kilometers"]["estimated_diameter_max"].Value<double>(), obj[6].First["kilometers"]["estimated_diameter_min"].Value<double>()),
-                            close_approach_data = obj[8].First.ToObject<List<CloseApproachDatum>>().FirstOrDefault()
+                            id = (string)asteroid["id"],
+                            name = asteroid["name"].Value<string>(),
+                            estimated_diameter = estimatedDiameter,
+                            mediaDiametro = CalculaMedia(maxDiameter, minDiameter),
+                            close_approach_data = asteroid["close_approach_data"].FirstOrDefault()?.ToObject<CloseApproachDatum>()
                         });
-
-
                     }
                 }
             }
 
             return nearEarthObjectsLista;
         }
+
 
 
 
