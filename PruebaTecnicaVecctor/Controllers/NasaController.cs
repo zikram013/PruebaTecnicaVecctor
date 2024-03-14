@@ -20,9 +20,16 @@ namespace PruebaTecnicaVecctor.Controllers
         public IActionResult GetAsteroids([FromQuery] int? days)
         {
 
-            var result = _nasaService.ObtenerJson(days);   
+            var result = _nasaService.ObtenerJson(days);
 
-            return Ok();
+            if (result.Data.CodigoResultado == 1)
+            {
+                return BadRequest(result.Data.Mensaje);
+            }
+            else 
+            {
+                return Ok(result.Data.NasaAsteroids);
+            }
         }
     }
 }

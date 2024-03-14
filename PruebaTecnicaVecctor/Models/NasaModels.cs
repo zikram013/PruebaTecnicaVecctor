@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PruebaTecnicaVecctor.DTOs;
+using PruebaTecnicaVecctor.Entidad;
 
 namespace PruebaTecnicaVecctor.Models
 {
@@ -12,6 +13,6 @@ namespace PruebaTecnicaVecctor.Models
         public string Mensaje { get; set; }
 
         [JsonProperty("NasaApi")]
-        public DatoApiNasaDTO DatoApiNasaDTO { get; set; }
+        public List<NasaAsteroids> NasaAsteroids { get; set; }
     }
 }
