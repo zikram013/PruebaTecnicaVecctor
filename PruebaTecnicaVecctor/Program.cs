@@ -1,6 +1,7 @@
 using PruebaTecnicaVecctor.Servicio;
 using PruebaTecnicaVecctor.Servicio.Interfaz;
 using PruebaTecnicaVecctor.ContextoBBDD;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
