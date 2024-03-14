@@ -3,6 +3,8 @@
     public class DatoApiNasaDTO
     {
         public NearEarthObjects near_earth_objects { get; set; }
+
+        public string mensaje { get; set; }
     }
 
     public class Links

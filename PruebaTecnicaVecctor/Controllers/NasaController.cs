@@ -28,7 +28,7 @@ namespace PruebaTecnicaVecctor.Controllers
             }
             else 
             {
-                return Ok(result.Data.NasaAsteroids);
+                return Ok(result);
             }
         }
     }
