@@ -55,7 +55,7 @@ namespace PruebaTecnicaVecctor.Servicio
                 {
                     CodigoResultado = 0,
                     NasaAsteroids = new List<NasaAsteroids>(),
-                    Mensaje = "No se han encontrado satelites potencialmente peligrosos"
+                    Mensaje = "No se han encontrado satelites para ese rango de fechas"
                 };
                 return result;
             }
@@ -86,6 +86,18 @@ namespace PruebaTecnicaVecctor.Servicio
                 })
                 .ToList();
 
+
+
+            if (asteroides.Count() == 0)
+            {
+                result.Data = new NasaModels()
+                {
+                    CodigoResultado = 0,
+                    NasaAsteroids = asteroides,
+                    Mensaje = "No se han encontrado satelites potencialmente peligrosos"
+                };
+                return result;
+            }
 
             var asteroids = asteroides.OrderByDescending(datos => datos.Diametro).Take(3).ToList();
 
