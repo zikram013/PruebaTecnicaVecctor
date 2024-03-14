@@ -61,9 +61,9 @@ namespace PruebaTecnicaVecctor.Servicio.Interfaz
         private List<NearEarthObjects> ParseNearEarthObjects(string jsonResponse)
         {
             List<NearEarthObjects> nearEarthObjectsLista = new List<NearEarthObjects>();
-            var resJSON = jsonResponse;
+           
 
-            JObject parent = JObject.Parse(resJSON);
+            JObject parent = JObject.Parse(jsonResponse);
             var dias = parent.Value<JObject>("near_earth_objects").Properties().ToList();
 
             foreach (var item in dias)
@@ -75,15 +75,16 @@ namespace PruebaTecnicaVecctor.Servicio.Interfaz
 
                     if (is_potentially_hazardous_asteroid)
                     {
-                        NearEarthObjects nearEarthObjects = new NearEarthObjects();
-                        nearEarthObjects.name = obj[3].First.ToString();
-                        nearEarthObjects.estimated_diameter = obj[6].First.ToObject<EstimatedDiameter>();
-                        nearEarthObjects.mediaDiametro = CalculaMedia(nearEarthObjects.estimated_diameter.kilometers.estimated_diameter_max, nearEarthObjects.estimated_diameter.kilometers.estimated_diameter_min);
-                        nearEarthObjects.close_approach_data = obj[8].First.ToObject<List<CloseApproachDatum>>().FirstOrDefault();
+                        nearEarthObjectsLista.Add(new NearEarthObjects
+                        {
+                            name = obj[3].First.ToString(),
+                            estimated_diameter = obj[6].First.ToObject<EstimatedDiameter>(),
+                            mediaDiametro = CalculaMedia(obj[6].First["kilometers"]["estimated_diameter_max"].Value<double>(), obj[6].First["kilometers"]["estimated_diameter_min"].Value<double>()),
+                            close_approach_data = obj[8].First.ToObject<List<CloseApproachDatum>>().FirstOrDefault()
+                        });
 
-                        nearEarthObjectsLista.Add(nearEarthObjects);
+
                     }
-
                 }
             }
 

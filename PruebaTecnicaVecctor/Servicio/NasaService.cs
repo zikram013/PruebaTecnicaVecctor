@@ -59,23 +59,19 @@ namespace PruebaTecnicaVecctor.Servicio
                 };
                 return result;
             }
-        
-        
 
-            var asteroides = datosObtenidos.Select((x, index) => new 
-                    { 
-                        Datos = x.near_earth_objects, 
-                        Index = index 
-                    })
-                .Where(obj => !obj.Datos.is_potentially_hazardous_asteroid)
+
+
+            var asteroides = datosObtenidos.Select(x => x.near_earth_objects)
+                .Where(obj => obj.is_potentially_hazardous_asteroid)
                 .Select(obj => new NasaAsteroids
                 {
-                    Id = obj.Index + 1, // Sumar 1 para comenzar en 1 en lugar de 0
-                    Name = obj.Datos.name,
-                    Diametro = obj.Datos.mediaDiametro,
-                    Velocidad = double.Parse(obj.Datos.close_approach_data.relative_velocity.kilometers_per_hour),
-                    Fecha = DateTime.Parse(obj.Datos.close_approach_data.close_approach_date),
-                    Planeta = obj.Datos.close_approach_data.orbiting_body
+                    Id = int.Parse(obj.id),
+                    Name = obj.name,
+                    Diametro = obj.mediaDiametro,
+                    Velocidad = double.Parse(obj.close_approach_data.relative_velocity.kilometers_per_hour),
+                    Fecha = DateTime.Parse(obj.close_approach_data.close_approach_date),
+                    Planeta = obj.close_approach_data.orbiting_body
                 })
                 .ToList();
 
