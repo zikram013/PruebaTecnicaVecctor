@@ -49,6 +49,17 @@ namespace PruebaTecnicaVecctor.Servicio
 
             var datosObtenidos = _apiService.ObtenerDatos(DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(Double.Parse(days.ToString())).ToString("yyyy-MM-dd"));
 
+            if (datosObtenidos.Count() == 0) 
+            {
+                result.Data = new NasaModels()
+                {
+                    CodigoResultado = 0,
+                    NasaAsteroids = new List<NasaAsteroids>(),
+                    Mensaje = "No se han encontrado satelites potencialmente peligrosos"
+                };
+                return result;
+            }
+
             if (!string.IsNullOrEmpty(datosObtenidos.FirstOrDefault().mensaje)) 
             {
                 result.Data = new NasaModels()
@@ -77,17 +88,6 @@ namespace PruebaTecnicaVecctor.Servicio
 
 
             var asteroids = asteroides.OrderByDescending(datos => datos.Diametro).Take(3).ToList();
-
-            if (asteroides.Count() == 0) 
-            {
-                result.Data = new NasaModels()
-                {
-                    CodigoResultado = 0,
-                    NasaAsteroids = asteroides,
-                    Mensaje = "No se han encontrado satelites potencialmente peligrosos"
-                };
-                return result;
-            }
 
             result.Data = new NasaModels()
             {

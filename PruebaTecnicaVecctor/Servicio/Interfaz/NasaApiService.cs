@@ -15,7 +15,7 @@ namespace PruebaTecnicaVecctor.Servicio.Interfaz
 
             using (var httpCliente = new HttpClient()) 
             {
-                string url = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={ahora}&end_date={hasta}&api_key=BgkFvbvedy9zfdeApHGbbFOMr2cmhOhWMunVhnX2";
+                string url = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={ahora}&end_date={hasta}&api_key=zdUP8ElJv1cehFM0rsZVSQN7uBVxlDnu4diHlLSb";
 
                 var dto = new List<DatoApiNasaDTO>();
 
@@ -41,6 +41,8 @@ namespace PruebaTecnicaVecctor.Servicio.Interfaz
                     {
                         mensaje = ex.Message
                     });
+
+                    return dto;
                 }
                
 
