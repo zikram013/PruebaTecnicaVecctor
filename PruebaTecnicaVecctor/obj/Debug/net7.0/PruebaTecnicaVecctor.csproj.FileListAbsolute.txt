@@ -70,3 +70,8 @@ D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaVecctor\obj\Debug\n
 D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaVecctor\obj\Debug\net7.0\PruebaTecnicaVecctor.pdb
 D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaVecctor\obj\Debug\net7.0\PruebaTecnicaVecctor.genruntimeconfig.cache
 D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaVecctor\obj\Debug\net7.0\ref\PruebaTecnicaVecctor.dll
+D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaVecctor\bin\Debug\net7.0\Humanizer.dll
+D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaVecctor\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaVecctor\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaVecctor\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaVecctor\bin\Debug\net7.0\System.CodeDom.dll

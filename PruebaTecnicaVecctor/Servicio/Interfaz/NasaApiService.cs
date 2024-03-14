@@ -8,41 +8,41 @@ namespace PruebaTecnicaVecctor.Servicio.Interfaz
 {
     public class NasaApiService : INasaApiService
     {
-        private readonly HttpClient _httpClient;
-
-        public NasaApiService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+       
 
         public List<DatoApiNasaDTO> ObtenerDatos(string ahora, string hasta)
         {
-            string url = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={ahora}&end_date={hasta}&api_key=BgkFvbvedy9zfdeApHGbbFOMr2cmhOhWMunVhnX2";
 
-            HttpResponseMessage response = _httpClient.GetAsync(url).GetAwaiter().GetResult();
-
-            if (!response.IsSuccessStatusCode)
+            using (var httpCliente = new HttpClient()) 
             {
-                string errorMessage = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                if (errorMessage.Contains("The Feed date limit is only 7 Days"))
+                string url = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={ahora}&end_date={hasta}&api_key=BgkFvbvedy9zfdeApHGbbFOMr2cmhOhWMunVhnX2";
+
+                HttpResponseMessage response = httpCliente.GetAsync(url).GetAwaiter().GetResult();
+
+                if (!response.IsSuccessStatusCode)
                 {
-                    throw new Exception("Date Format Exception - La fecha limite para buscar son 7 dias");
+                    string errorMessage = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                    if (errorMessage.Contains("The Feed date limit is only 7 Days"))
+                    {
+                        throw new Exception("Date Format Exception - La fecha limite para buscar son 7 dias");
+                    }
+                    else
+                    {
+                        throw new Exception(HttpStatusCode.BadRequest.ToString());
+                    }
                 }
-                else
+
+                string jsonResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                var nearEarthObjects = ParseNearEarthObjects(jsonResponse);
+
+                var dto = nearEarthObjects.Select(x => new DatoApiNasaDTO
                 {
-                    throw new Exception(HttpStatusCode.BadRequest.ToString());
-                }
+                    near_earth_objects = x
+                }).ToList();
+
+                return dto;
             }
-
-            string jsonResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var nearEarthObjects = ParseNearEarthObjects(jsonResponse);
-
-            var dto = nearEarthObjects.Select(x => new DatoApiNasaDTO
-            {
-                near_earth_objects = x
-            }).ToList();
-
-            return dto;
+                
         }
 
 
