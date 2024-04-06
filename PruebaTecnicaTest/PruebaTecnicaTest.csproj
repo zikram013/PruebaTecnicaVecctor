@@ -7,6 +7,8 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <BaseOutputPath>D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaTest\bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>D:\repositorios\multimedia\PruebaTecnicaVecctor\PruebaTecnicaTest\obj</BaseIntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

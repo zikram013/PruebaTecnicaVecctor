@@ -10,10 +10,6 @@ namespace PruebaTecnicaVecctor.Servicio
     {
         private readonly INasaApiService _apiService;
 
-        public NasaService()
-        {
-        }
-
         public NasaService(INasaApiService apiService)
         {
             _apiService = apiService;
